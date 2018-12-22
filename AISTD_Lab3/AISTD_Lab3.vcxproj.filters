@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\Tree">
+      <UniqueIdentifier>{60ca0afb-5ac3-497d-ab50-c0d56978b795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Iterator">
+      <UniqueIdentifier>{ee8e1985-04a7-4c9b-abad-cdf879fec3e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -21,16 +27,28 @@
     <ClInclude Include="targetver.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
+    <ClInclude Include="My_Exception.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Include.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Elem.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="binary_tree.h">
+      <Filter>Файлы заголовков\Tree</Filter>
     </ClInclude>
-    <ClInclude Include="Compare.h">
+    <ClInclude Include="Node.h">
+      <Filter>Файлы заголовков\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Iterator.h">
+      <Filter>Файлы заголовков\Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeIterator_bft.h">
+      <Filter>Файлы заголовков\Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeIterator_dft.h">
+      <Filter>Файлы заголовков\Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,13 +56,22 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AISTD_Lab2.cpp">
+    <ClCompile Include="AISTD_Lab3.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="List.cpp">
+    <ClCompile Include="binary_tree.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Compare.cpp">
+    <ClCompile Include="My_Exception.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeIterator_bft.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeIterator_dft.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

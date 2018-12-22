@@ -21,7 +21,7 @@ namespace UnitTestLab1
 			arr.fillArr();
 			Assert::IsTrue(is_equal(reinterpret_cast<int*> (arrT), 3, 3, arr.arr,3,3));
 		}
-		TEST_METHOD(is_equal_2x3_and_3x3_eq_arr)
+		TEST_METHOD(is_equal_2x3_and_3x3_neq_arr)
 		{
 			int arrT[3][3] = { { 1,1,1, },{ 1,2,1 },{ 1,1,1 } };
 			Array arr;
@@ -75,6 +75,28 @@ namespace UnitTestLab1
 			arr.createArr();
 			arr.fillArr();
 			Assert::IsTrue(is_equal(reinterpret_cast<int*> (arrT), 1, 1, arr.arr, 1, 1));
+		}
+		TEST_METHOD(is_equal_1x3_eq_arr1)
+		{
+			int arrT[1][3] = { 1 , 1 , 1 };
+			Array arr;
+			arr.row = 1;
+			arr.col = 3;
+			arr.firstN = 1;
+			arr.createArr();
+			arr.fillArr();
+			Assert::IsTrue(is_equal(reinterpret_cast<int*> (arrT), 1, 3, arr.arr, 1, 3));
+		}
+		TEST_METHOD(is_equal_3x1_eq_arr1)
+		{
+			int arrT[3][1] = { {1} , {1} , {1} };
+			Array arr;
+			arr.row = 3;
+			arr.col = 1;
+			arr.firstN = 1;
+			arr.createArr();
+			arr.fillArr();
+			Assert::IsTrue(is_equal(reinterpret_cast<int*> (arrT), 3, 1, arr.arr, 3, 1));
 		}
 		//reinterpret_cast<int*> (arrT)
 	};

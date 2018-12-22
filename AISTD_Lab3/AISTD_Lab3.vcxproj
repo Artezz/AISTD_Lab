@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,14 +20,14 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{7E0B6DB7-A48E-496D-82C5-EF7DABE80634}</ProjectGuid>
+    <ProjectGuid>{40985DDB-D22C-4B19-A101-F42C4BF48BE5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>AISTDLab2</RootNamespace>
+    <RootNamespace>AISTDLab3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -143,23 +143,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Compare.h" />
-    <ClInclude Include="Elem.h" />
+    <ClInclude Include="binary_tree.h" />
     <ClInclude Include="Include.h" />
-    <ClInclude Include="List.h" />
+    <ClInclude Include="Iterator.h" />
+    <ClInclude Include="My_Exception.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="TreeIterator_dft.h" />
+    <ClInclude Include="TreeIterator_bft.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AISTD_Lab2.cpp" />
-    <ClCompile Include="Compare.cpp" />
-    <ClCompile Include="List.cpp" />
+    <ClCompile Include="AISTD_Lab3.cpp" />
+    <ClCompile Include="binary_tree.cpp" />
+    <ClCompile Include="My_Exception.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TreeIterator_bft.cpp" />
+    <ClCompile Include="TreeIterator_dft.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

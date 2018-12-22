@@ -69,4 +69,11 @@ struct Array {
 			std::cout << std::endl;
 		}
 	}
+	~Array(){
+		for (size_t i = 0; i < row - i; i++) {
+			free(arr[i]);
+		}
+		free(arr);
+		std::cout << "OK";
+	}
 };
