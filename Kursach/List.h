@@ -1,17 +1,19 @@
 #pragma once
 class Item;
 class List {
-	size_t max_capacity;
+	size_t max_capacity, sizeList;
 	Item *head;
-	Item *current;
 	void insert(Item* newItem);
-	void sort();
-	void read_from_file();
+	void size();
+	Item* getHead();
+	size_t getSize();
 public:
 	List();
 	~List();
-	void dp(Item* list);
-	void next();
+	void dp(List* list);
+	//Item* next();
+
+	void read_from_file();
 
 	void printList();
 

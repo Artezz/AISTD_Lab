@@ -3,24 +3,35 @@
 #include "fstream"
 
 using namespace std;
-Item::Item(fstream& list_of_item) {
+Item::Item() {
 	next = nullptr;
-		try {
-			if (list_of_item.eof())
-				throw ("End of file");
-			list_of_item >> name;
-			list_of_item >> value;
-			list_of_item >> itemSize;
-			list_of_item >> max;
-		}
-		catch (char *e) {
-			
-		}
 
-		
-
-		
+	name = new char[100];
+	name = "\0";
+	value = 0;
+	itemSize = 0;
+	max = 0;
 	
+}
+Item::~Item() {
+
+
+}
+void Item::Item_Read(fstream& list_of_item) {
+
+	try {
+		if (list_of_item.eof())
+			throw ("End of file");
+		list_of_item >> *name;
+		list_of_item >> value;
+		list_of_item >> itemSize;
+		list_of_item >> max;
+	}
+	catch (char *e) {
+
+	}
+
+
 }
 
 char * Item::getName()
@@ -28,24 +39,19 @@ char * Item::getName()
 	return name;
 }
 
-unsigned int Item::getValue()
+size_t Item::getValue()
 {
 	return value;
 }
 
-unsigned int Item::getItemSize()
+size_t Item::getItemSize()
 {
 	return itemSize;
 }
 
-unsigned int Item::getMax()
+size_t Item::getMax()
 {
 	return max;
-}
-
-double Item::getRelativeValue()
-{
-	return relative_value;
 }
 
 Item * Item::nextItem()

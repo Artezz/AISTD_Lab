@@ -1,18 +1,18 @@
 #pragma once
 class List;
-
 class Item {
 
 	char* name;
-	unsigned int value, itemSize, max;
+	size_t value, itemSize, max;
 	Item* next;
 public:
-	Item(fstream& list_of_item);
+	void Item_Read(std::fstream& list_of_item);
+	Item();
 	~Item();
 	char* getName();
-	unsigned int getValue();
-	unsigned int getItemSize();
-	unsigned int getMax();
+	size_t getValue();
+	size_t getItemSize();
+	size_t getMax();
 	Item* nextItem();
 	void setNext(Item* newItem);
 

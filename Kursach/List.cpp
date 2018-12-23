@@ -9,30 +9,50 @@ List::~List() {
 
 }
 
-void List::dp(Item * list)
+void List::dp(List * list)
 {
-	Item* current = list;
-	size_t n = size();
+	Item* current = list->getHead();
+	size_t n = list->getSize(), count = 0;
 	int* dp = new int[max_capacity+1];
 	dp[0] = 0;
 	for (int w = 1; w <= max_capacity; w++)
 	{
+		current = list->getHead();
+		count = current->getMax();
 		dp[w] = dp[w - 1];
 		for (size_t i = 0; i < n; i++)
 		{
+			
 			if (current->getItemSize() <= w)
 			{
-				dp[w] = max(dp[w], dp[w - current->getItemSize()] + current->getValue());
+				if (dp[w] < dp[w - current->getItemSize()] + current->getValue())
+				{
+					dp[w] = dp[w - current->getItemSize()] + current->getValue();
+					insert(current);
+				}
+				
 			}
-			
-
+			if (count-- <= 0) {
+				current = current->nextItem();
+				count = current->getMax();
+			}
 		}
 	}
 }
 
-void List::next()
+////Item* List::next()
+////{
+////	return current->nextItem();
+////}
+
+Item * List::getHead()
 {
-	current = current->nextItem;
+	return head;
+}
+
+size_t List::getSize()
+{
+	return sizeList;
 }
 
 //void List::sort() {
@@ -64,36 +84,49 @@ void List::next()
 //
 //}
 void List::insert(Item* newItem) {
-	newItem->setNext = head;
+	newItem->setNext(head);
 	head = newItem;
 }
 void List::read_from_file() {
 	fstream list_of_item;
 	
 	list_of_item.open("Backpack.txt");
-	while (!list_of_item.eof()) {
-		Item *temp = new Item(list_of_item);
-		try {
-			if (temp->getItemSize() == 0 || temp->getMax == 0 || temp->getName == "" || temp->getValue == 0)
-				throw "Uncorrect item";
-			insert(temp);
+	if (list_of_item.is_open()) {
+		while (!list_of_item.eof()) {
+			Item *temp = new Item();
+			temp->Item_Read(list_of_item);
+			try {
+				if (temp->getItemSize() == 0 || temp->getMax() == 0 || temp->getName() == "" || temp->getValue() == 0)
+					throw "Uncorrect item";
+				insert(temp);
+			}
+			catch (char* e) {
+				cout << e << endl;
+				delete temp;
+				list_of_item.clear();
+				if (list_of_item.get() != '\n')
+					list_of_item.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
 		}
-		catch (char* e) {
-			cout << e << endl;
-			delete temp;
-			list_of_item.clear();
-			if (list_of_item.get() != '\n')
-				list_of_item.ignore(numeric_limits<streamsize>::max(), '\n');
-		}
+
+		list_of_item.close();
 	}
-	list_of_item.close();
+}
+
+void List::size()
+{
+	Item* current = head;
+	while (current->nextItem() != nullptr)
+	{
+		sizeList += current->getMax();
+	}
 }
 
 void List::printList()
 {
 	Item* temp = head;
-	while (temp->nextItem != nullptr) {
-		cout << temp->getName << "  " << temp->getItemSize() << "  " << temp->getValue() << "  " << temp->getMax() << endl;
+	while (temp->nextItem() != nullptr) {
+		cout << temp->getName() << "  " << temp->getItemSize() << "  " << temp->getValue() << "  " << temp->getMax() << endl;
 		temp = temp->nextItem();
 	}
 }
