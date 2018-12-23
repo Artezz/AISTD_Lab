@@ -11,33 +11,52 @@ List::~List() {
 
 void List::dp(List * list)
 {
+	Item *newItem = new Item();
+	Item *maxItem = nullptr;
 	Item* current = list->getHead();
 	size_t n = list->getSize(), count = 0;
 	int* dp = new int[max_capacity+1];
 	dp[0] = 0;
 	for (int w = 1; w <= max_capacity; w++)
 	{
+		
 		current = list->getHead();
 		count = current->getMax();
 		dp[w] = dp[w - 1];
 		for (size_t i = 0; i < n; i++)
 		{
 			
+			
 			if (current->getItemSize() <= w)
 			{
-				if (dp[w] < dp[w - current->getItemSize()] + current->getValue())
+				if (dp[w] < (dp[w - current->getItemSize()] + current->getValue()) && current->getMax() != current->getUsed())
 				{
 					dp[w] = dp[w - current->getItemSize()] + current->getValue();
-					insert(current);
+					maxItem = current;
+					
 				}
 				
 			}
-			if (count-- <= 0) {
+			if (--count <= 0) {
 				current = current->nextItem();
-				count = current->getMax();
+				if (current != nullptr) {
+					count = current->getMax();
+				}
+			}
+			
+			if (maxItem!= nullptr) {
+				maxItem->setUsed(maxItem->getUsed()+1);
+				newItem->copy(maxItem);
+				insert(newItem);
+				maxItem = nullptr;
+				newItem = new Item();
+
 			}
 		}
 	}
+	std::cout << dp[max_capacity];
+	if (newItem->getValue() == 0)
+		delete newItem;
 }
 
 ////Item* List::next()
@@ -55,34 +74,41 @@ size_t List::getSize()
 	return sizeList;
 }
 
-//void List::sort() {
-//	Item* currentPos = head;
-//	Item* prevPos = nullptr;
-//	Item* prevMaxRevVal = nullptr;
-//	Item* prevTemp = nullptr;
-//	while (currentPos->nextItem() != nullptr) {
-//		Item* temp = currentPos;
-//		Item* maxRevVal = currentPos;
-//		while (temp->nextItem() != nullptr) {
-//			if (temp->getRelativeValue() >= maxRevVal->getRelativeValue()) {
-//				maxRevVal = temp;
-//				prevMaxRevVal = prevTemp;
-//			}
-//			prevTemp = temp;
-//			temp = temp->nextItem();
-//		}
-//		if (prevPos != nullptr) {
-//			prevMaxRevVal->setNext(maxRevVal->nextItem());
-//			maxRevVal->setNext(prevPos->nextItem());
-//			prevPos->setNext(maxRevVal);
-//
-//		}
-//
-//		prevPos = currentPos;
-//		currentPos = currentPos->nextItem();
-//	}
-//
-//}
+void List::sort() {
+	Item* currentPos = head;
+	Item* prevPos = nullptr;
+	Item* prevMaxVal = nullptr;
+	Item* prevTemp = nullptr;
+	while (currentPos->nextItem() != nullptr) {
+		Item* temp = currentPos;
+		
+		Item* maxVal = currentPos;
+		while (temp != nullptr) {
+			if (temp->getValue() > maxVal->getValue()) {
+				maxVal = temp;
+				prevMaxVal = prevTemp;
+			}
+			prevTemp = temp;
+			temp = temp->nextItem();
+		}
+		if (currentPos != maxVal) {
+			prevMaxVal->setNext(maxVal->nextItem());
+			if (prevPos != nullptr) {
+				maxVal->setNext(prevPos->nextItem());
+				prevPos->setNext(maxVal);
+				prevPos = currentPos;
+				currentPos = currentPos->nextItem();
+			}
+			else {
+				head = maxVal;
+				maxVal->setNext(currentPos);
+				prevPos = maxVal;
+			}
+		}
+		
+	}
+
+}
 void List::insert(Item* newItem) {
 	newItem->setNext(head);
 	head = newItem;
@@ -113,20 +139,31 @@ void List::read_from_file() {
 	}
 }
 
+void List::setMaxCapacity(size_t max)
+{
+	max_capacity = max;
+}
+
 void List::size()
 {
 	Item* current = head;
-	while (current->nextItem() != nullptr)
+	while (current != nullptr)
 	{
 		sizeList += current->getMax();
+		current = current->nextItem();
 	}
 }
 
 void List::printList()
 {
 	Item* temp = head;
-	while (temp->nextItem() != nullptr) {
-		cout << temp->getName() << "  " << temp->getItemSize() << "  " << temp->getValue() << "  " << temp->getMax() << endl;
-		temp = temp->nextItem();
+	if (temp != nullptr) {
+		cout << "Name   Value   Size" << endl;
+		while (temp != nullptr) {
+			cout << temp->getName() << "     " << temp->getValue()  << "     " << temp->getItemSize() << endl;
+			temp = temp->nextItem();
+		}
 	}
+	else
+		cout << "List is empty";
 }
